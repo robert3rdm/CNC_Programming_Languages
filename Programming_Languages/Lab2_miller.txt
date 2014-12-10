@@ -1,0 +1,113 @@
+Lab 2 Robert Miller CLITE project
+
+1) Bool, Char, Else, False, Float,
+If, Int, Main, True, While,
+Eof, LeftBrace, RightBrace, LeftBracket, RightBracket,
+LeftParen, RightParen, Semicolon, Comma, Assign,
+Equals, Less, LessEqual, Greater, GreaterEqual,
+Not, NotEqual, Plus, Minus, Multiply,
+Divide, And, Or, Identifier, IntLiteral,
+FloatLiteral, CharLiteral
+
+
+1)((Token Type) (lexeme))
+Bool bool
+Char char
+Else else
+False false
+Float float
+If if
+Int int
+Main main
+True true
+While while
+Eof eof
+LeftBrace {
+RightBrace }
+leftBracket [
+RightBracket ]
+LeftParen (
+Right Paren )
+Semicolon ;
+Comma ,
+Assign =
+Equals ==
+less <
+LessEqual <=
+Greater >
+GreaterEqual >=
+Not !
+NotEqual !=
+Plus +
+Minus -
+Multiply *
+Divide /
+And &
+Or ||
+Identifier x=1 1 is the identifier
+IntLiteral 1
+FloatLiteral 1.0
+CharLiteral abc
+
+
+2) Tokens for Clite Factorial
+
+Int int
+Main main
+LeftParen (
+RightParen )
+LeftBrace {
+Int int
+Identifier n
+Comma ,
+Identifier i
+Comma ,
+Identifier f
+Semicolon ;
+CharLiteral n
+Assign =
+IntLiteral 3
+Semicolon ;
+CharLiteral i
+Assign =
+IntLiteral 1
+Semicolon ;
+CharLiteral f
+Assign =
+IntLiteral 1
+Semicolon ;
+While while
+LeftParen (
+CharLiteral i
+LessThan <
+CharLiteral n
+RightParen )
+LeftBrace {
+CharLiteral i
+Assign =
+CharLiteral i
+Plus +
+IntLiteral 1
+Semicolon ;
+CharLiteral f
+Assign =
+CharLiteral f
+Multiply *
+CharLiteral i
+Semicolon ;
+RightBrace }
+RightBrace }
+
+
+minus - line 89 Lexer.java
+Multiply * line 89 Lexer.java
+LeftParen ( line 89 Lexer.java
+RightParen ) line 89 Lexer.java
+LeftBrace { line 89 Lexer.java
+RightBrace } line 89 Lexer.java
+Semicolon ; line 89 Lexer.java
+Comma , line 89 Lexer.java
+LessThan < line 97 Lexer.java
+GreaterThan > line 97 Lexer.java
+Not ! line 97 Lexer.java
+

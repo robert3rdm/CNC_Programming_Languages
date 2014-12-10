@@ -1,0 +1,4 @@
+Lab 3 Lexer completed
+Robert Miller
+
+I have completed all 4 stages of the Lexer and have included the source and README in this ZIP.

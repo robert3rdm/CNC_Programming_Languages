@@ -1,0 +1,40 @@
+package aiLab1;
+
+public class Environment {
+	public static boolean Clean;
+	public static String Location = "A";
+	public static String room;
+	
+	public Environment(boolean clean, String room){
+		Clean = clean;
+		Location = room;
+
+	}
+public static String moveFunction(String move){
+	if (room == "A"){
+		room = "B";
+	}
+	else room = "A";
+	Location = room;
+	return room;
+	
+}
+public static Boolean suckFunction(boolean clean){
+	if (clean == false){
+		clean = true;
+	}
+	else;
+	return clean;	
+}
+
+public static void main(String[] args) {
+	for(int i=0; i<3; i++){
+		suckFunction(Clean);
+		moveFunction(Location);
+		System.out.println(Clean);
+		System.out.println(Location);
+	}
+	System.out.println("All Clean!");
+}
+
+}

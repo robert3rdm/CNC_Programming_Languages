@@ -1,0 +1,77 @@
+int
+main
+(
+)
+{
+char
+Identifier	c
+;
+int
+Identifier	i
+;
+int
+Identifier	math
+;
+Identifier	c
+=
+CharLiteral	h
+;
+Identifier	math
+=
+IntLiteral	1
+*
+IntLiteral	2
++
+(
+IntLiteral	2
+/
+IntLiteral	2
+)
+-
+IntLiteral	1
+;
+Identifier	i
+=
+Identifier	c
++
+IntLiteral	3
+*
+IntLiteral	5
+;
+if
+(
+Identifier	math
+==
+=
+IntLiteral	3
+)
+{
+Identifier	return
+true
+;
+}
+else
+if
+(
+Identifier	math
+>
+IntLiteral	2
+)
+{
+Identifier	return
+true
+;
+}
+else
+if
+(
+Identifier	math
+>=
+=
+IntLiteral	2
+)
+{
+Identifier	return
+true
+}
+}

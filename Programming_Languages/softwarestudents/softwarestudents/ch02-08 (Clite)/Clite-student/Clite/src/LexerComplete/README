@@ -1,0 +1,8 @@
+to compile:
+javac Lexer.java
+java Lexer lexer_test.cpp
+
+
+or use pre generated class files
+java Lexer lexer_test.cpp
+view on output or view output in lexer_test.output
