@@ -16,6 +16,7 @@ class Program {
     }
  public void display(){
  		Program.indent = Program.indent + Program.tab;
+		System.out.println("");
 		System.out.println("Program (abstract syntax): ");
 		decpart.display();
 		body.display();
@@ -48,7 +49,7 @@ class Declaration {
         v = var; t = type;
     } // declaration */
 	public void display () {
-  	System.out.print("<" + v + ", " + t.getId() + ">");  
+  	System.out.print("<" + v + ", " + t.toString() + ">");  
 	}
 }
 
@@ -61,7 +62,6 @@ class Type {
     // final static Type UNDEFINED = new Type("undef");
     
     private String id;
-		public String  getId() {return id;}
 
     private Type (String t) { id = t; }
 
@@ -70,7 +70,7 @@ class Type {
 
 abstract class Statement {
     // Statement = Skip | Block | Assignment | Conditional | Loop
-	static int i = 0;
+//	static int i = 0;
 
 	public void display(){
 	//	System.out.println("statement");
@@ -139,7 +139,13 @@ class Conditional extends Statement {
     Conditional (Expression t, Statement tp, Statement ep) {
         test = t; thenbranch = tp; elsebranch = ep;
     }
-    
+   public void display(){
+		System.out.println(Program.indent+"Conditional:");
+			super.display();
+			test.display();
+			thenbranch.display();
+			elsebranch.display();
+}	 
 }
 
 class Loop extends Statement {
@@ -150,9 +156,13 @@ class Loop extends Statement {
     Loop (Expression t, Statement b) {
         test = t; body = b;
     }
-    
+    public void display(){
+		System.out.println(Program.indent+ "Loop: ");
+			super.display();
+			test.display();
+			body.display();
+		}
 }
-
 abstract class Expression {
     // Expression = Variable | Value | Binary | Unary
 
@@ -266,7 +276,10 @@ class BoolValue extends Value {
         if (undef)  return "undef";
         return "" + value;
     }
-
+		public void display(){
+			System.out.println(Program.indent+Program.tab+"boolValue: "+value);
+			super.display();
+		}
 }
 
 class CharValue extends Value {
@@ -285,7 +298,10 @@ class CharValue extends Value {
         if (undef)  return "undef";
         return "" + value;
     }
-
+		public void display(){
+			System.out.println(Program.indent+Program.tab+"charValue: "+value);
+			super.display();
+		}
 }
 
 class FloatValue extends Value {
@@ -304,7 +320,10 @@ class FloatValue extends Value {
         if (undef)  return "undef";
         return "" + value;
     }
-
+		public void display(){
+			System.out.println(Program.indent+Program.tab+"floatValue: "+value);
+			super.display();
+		}
 }
 
 class Binary extends Expression {
@@ -315,7 +334,14 @@ class Binary extends Expression {
     Binary (Operator o, Expression l, Expression r) {
         op = o; term1 = l; term2 = r;
     } // binary
-
+	public void display(){
+			System.out.println(Program.indent+Program.tab+"Binary: ");
+			Program.indent = Program.indent + Program.tab;
+			op.display();
+			term1.display();
+			term2.display();
+			super.display();
+		}
 }
 
 class Unary extends Expression {
@@ -326,6 +352,10 @@ class Unary extends Expression {
     Unary (Operator o, Expression e) {
         op = o; term = e;
     } // unary
+		public void display(){
+			System.out.println(Program.indent+Program.tab+"Unary: "+ term);
+			super.display();
+		}
 
 }
 
@@ -474,5 +504,8 @@ class Operator {
     final static public Operator boolMap (String op) {
         return map (boolMap, op);
     }
+			public void display(){
+			System.out.println(Program.indent+Program.tab+"Operator: "+val);
+		}
 
 }
