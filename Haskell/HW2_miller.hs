@@ -68,4 +68,54 @@ raise n
 	|n `mod` 2 == 0 = raise (n-1) *2
 	|n `mod` 2 == 1 = raise (n-2) *2*2
 
+-- 5.5
+
+data Shape = Circle Float |
+	Rectangle Float Float |
+	Triangle Float Float Float
+	deriving (Eq, Ord, Show)
+
+perimeter :: Shape -> Float
+perimeter (Circle r) = 2*pi*r
+perimeter (Rectangle l w) = 2*l + 2*w
+perimeter (Triangle a b c) = a+b+c
+
+-- 5.7
+isRound :: Shape -> Bool
+isRound (Circle _) = True 
+isRound (Rectangle _ _ ) = False
+isRound (Triangle _ _ _) = False
+
+area :: Shape -> Float
+area (Triangle a b c)  = sqrt(((a+b+c)/2)*(((a+b+c)/2)-a)*(((a+b+c)/2)-b)*(((a+b+c)/2)-c))
+
+-- 5.9
+
+-- tim sheard
+
+-- problem 1
+--3,   even, even 3
+--Num, Ord, Bool
+
+--head, [1,2,3], [1,2,3] head
+--[a]      Num       Num  
+
+-- prob 2
+
+floater :: Float -> Float
+floater x = x+1
+--A)
+type1 :: (Float -> Float) -> Float
+type1 x = floater 3
+
+
+--B)
+type2 :: Float -> (Float -> Float)
+type2 x = x
+
+
+
+
+
+
 

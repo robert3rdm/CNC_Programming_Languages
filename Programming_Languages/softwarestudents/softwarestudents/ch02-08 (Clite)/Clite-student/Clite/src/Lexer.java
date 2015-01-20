@@ -105,10 +105,6 @@ public class Lexer {
 								return Token.semicolonTok;
 						case ',': ch = nextChar();
 								return Token.commaTok;
-						case '[': ch = nextChar();
-								return Token.leftBracketTok;
-						case ']': ch = nextChar();
-								return Token.rightBracketTok;
 
             case '&': check('&'); return Token.andTok;
             case '|': check('|'); return Token.orTok;

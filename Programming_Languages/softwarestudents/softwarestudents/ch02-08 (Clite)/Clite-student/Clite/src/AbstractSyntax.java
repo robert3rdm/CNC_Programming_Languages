@@ -4,6 +4,8 @@
 import java.util.*;
 
 class Program {
+		static String indent = "";
+		static String tab = "  ";
     // Program = Declarations decpart ; Block body
     Declarations decpart;
     Block body;
@@ -13,15 +15,28 @@ class Program {
         body = b;
     }
  public void display(){
-	 System.out.println("Program Start");
-	 body.display();
+ 		Program.indent = Program.indent + Program.tab;
+		System.out.println("Program (abstract syntax): ");
+		decpart.display();
+		body.display();
  }
 }
 
 class Declarations extends ArrayList<Declaration> {
     // Declarations = Declaration*
     // (a list of declarations d1, d2, ..., dn)
-
+	public void display(){
+		System.out.println(Program.tab+ "Declarations:");
+		System.out.print(Program.tab + Program.tab + "Declarations = {");
+		String sep = "";
+		for (Declaration dcl : this) {
+    	System.out.print(sep);
+			dcl.display();
+    	sep = ", ";
+		}
+		System.out.println("}");
+		
+	}
 }
 
 class Declaration {
@@ -32,7 +47,9 @@ class Declaration {
     Declaration (Variable var, Type type) {
         v = var; t = type;
     } // declaration */
-
+	public void display () {
+  	System.out.print("<" + v + ", " + t.getId() + ">");  
+	}
 }
 
 class Type {
@@ -44,6 +61,7 @@ class Type {
     // final static Type UNDEFINED = new Type("undef");
     
     private String id;
+		public String  getId() {return id;}
 
     private Type (String t) { id = t; }
 
@@ -52,12 +70,10 @@ class Type {
 
 abstract class Statement {
     // Statement = Skip | Block | Assignment | Conditional | Loop
-	static String indent = "";
-	int indentNum = 0;
-	int i = 0;
+	static int i = 0;
 
 	public void display(){
-		System.out.println(indent +"displaying statement");
+	//	System.out.println("statement");
 	}
 }
 
@@ -70,18 +86,18 @@ class Block extends Statement {
     public ArrayList<Statement> members = new ArrayList<Statement>();
 
 		public void display(){
-			indentNum += 1;
-			for(int k = indentNum; k> 0; k--){
-				indent = indent + "    ";
-			}	
-
-			System.out.println(indent+"Displaying Block increment by one");
+//			indentNum += 1;
+//			for(int k = indentNum; k> 0; k--){
+	//			indent = indent + "  ";
+	//		}	
+			System.out.println(Program.indent+"Block: ");
+			Program.indent = Program.indent + Program.tab;
 			for(Statement s: members){
-				i++;
-				if(i == (members.size()-1)){
-					indentNum = indentNum - 1;
-					System.out.println("decrement by one");
-				}
+		//		i++;
+		//		if(i == (members.size()-1)){
+		//			indentNum = indentNum - 1;
+					//System.out.println(indent+"decrement by one");
+		//		}
 				super.display();
 				s.display();
 			}
@@ -98,10 +114,15 @@ class Assignment extends Statement {
         source = e;
     }
 		public void display(){
-			System.out.println("displaying Assignment");
+	//		indentNum += 0;
+	//		for(int k = indentNum; k> 0; k--){
+	//			indent = indent + "  ";
+	//		}
+			System.out.println(Program.indent+"Assignment:");
 			super.display();
 			target.display();
 			source.display();
+	// 		indentNum = indentNum -1;
 		}
 }
 
@@ -134,8 +155,8 @@ class Loop extends Statement {
 
 abstract class Expression {
     // Expression = Variable | Value | Binary | Unary
+
 	public void display(){
-		System.out.println("displaying an Expression)");
 	}	
 }
 
@@ -154,6 +175,10 @@ class Variable extends Expression {
     }
     
     public int hashCode ( ) { return id.hashCode( ); }
+	
+		public void display(){
+		System.out.println(Program.indent+ Program.tab+"Variable: "+id );
+	}	
 
 }
 
@@ -214,7 +239,8 @@ class IntValue extends Value {
     }
 		
 		public void display(){
-			System.out.println("displaying IntValue");
+
+			System.out.println(Program.indent+Program.tab+"IntValue: "+value);
 			super.display();
 		}
 }

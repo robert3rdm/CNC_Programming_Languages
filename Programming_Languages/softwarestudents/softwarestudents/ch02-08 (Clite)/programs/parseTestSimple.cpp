@@ -1,1 +1,4 @@
-int main () {{a = 5;}{b = 1;}}
+int main () {
+int	a = 5;
+int	b = 1;
+}

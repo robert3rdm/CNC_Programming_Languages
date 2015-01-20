@@ -51,18 +51,46 @@ public class Parser {
   
     private Declarations declarations () {
         // Declarations --> { Declaration }
-        return null;  // student exercise
+			Declarations ds = new Declarations();
+				while (isType()) {
+					declaration(ds);
+				}
+        return ds;  // student exercise
     }
   
     private void declaration (Declarations ds) {
         // Declaration  --> Type Identifier { , Identifier } ;
         // student exercise
+			Type t = type();
+			while(!token.type().equals(TokenType.Semicolon)){
+				Variable id = new Variable(match(TokenType.Identifier));
+				ds.add(new Declaration(id, t));
+				if(token.type().equals(TokenType.Comma)){
+					match(TokenType.Comma);
+				}
+				token = lexer.next();
+				match(TokenType.Semicolon);
     }
+		}
   
     private Type type () {
         // Type  -->  int | bool | float | char 
         Type t = null;
         // student exercise
+				if(token.type().equals(TokenType.Int)){
+						return Type.INT;
+				}
+				else if(token.type().equals(TokenType.Char)){
+						return Type.CHAR;
+				}
+				else if(token.type().equals(TokenType.Float)){
+						return Type.FLOAT;
+				}
+				else if(token.type().equals(TokenType.Bool)){
+						return Type.BOOL;
+				}
+				token = lexer.next();
+
         return t;          
     }
   
