@@ -101,28 +101,28 @@ public class Parser {
         Statement s = new Skip();
         // student exercise
         if(token.type().equals(TokenType.Semicolon)){
-					System.out.println("Semicolon not yet implemented");
 					token = lexer.next();	
 				}
 				
-				if(token.type().equals(TokenType.Identifier)){
+				else if(token.type().equals(TokenType.Identifier)){
 					s = assignment();
 				}
 				
-				if(token.type().equals(TokenType.If)){
+				else if(token.type().equals(TokenType.If)){
 				  s = ifStatement();
 				}
 				
-				if(token.type().equals(TokenType.While)){
+				else if(token.type().equals(TokenType.While)){
 				  s = whileStatement();
 				}
 
-				if(token.type().equals(TokenType.LeftBrace)){
+				else if(token.type().equals(TokenType.LeftBrace)){
 					token = lexer.next();
 					s = statements();
 					match(TokenType.RightBrace);
-					
 				}
+				else error("Illegal Statement");
+				
 				return s;
     }
   

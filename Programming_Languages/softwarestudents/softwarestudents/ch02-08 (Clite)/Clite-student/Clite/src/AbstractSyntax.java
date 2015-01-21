@@ -6,6 +6,7 @@ import java.util.*;
 class Program {
 		static String indent = "";
 		static String tab = "  ";
+		static int tabCount = 1;
     // Program = Declarations decpart ; Block body
     Declarations decpart;
     Block body;
@@ -15,7 +16,6 @@ class Program {
         body = b;
     }
  public void display(){
- 		Program.indent = Program.indent + Program.tab;
 		System.out.println("");
 		System.out.println("Program (abstract syntax): ");
 		decpart.display();
@@ -86,18 +86,12 @@ class Block extends Statement {
     public ArrayList<Statement> members = new ArrayList<Statement>();
 
 		public void display(){
-//			indentNum += 1;
-//			for(int k = indentNum; k> 0; k--){
-	//			indent = indent + "  ";
-	//		}	
+			for(int i = Program.tabCount; i> 0; i--){
+				Program.indent = Program.indent + Program.tab;
+			}
+
 			System.out.println(Program.indent+"Block: ");
-			Program.indent = Program.indent + Program.tab;
 			for(Statement s: members){
-		//		i++;
-		//		if(i == (members.size()-1)){
-		//			indentNum = indentNum - 1;
-					//System.out.println(indent+"decrement by one");
-		//		}
 				super.display();
 				s.display();
 			}
@@ -114,14 +108,15 @@ class Assignment extends Statement {
         source = e;
     }
 		public void display(){
-	//		indentNum += 0;
-	//		for(int k = indentNum; k> 0; k--){
-	//			indent = indent + "  ";
-	//		}
+			String tempIndent = Program.indent;
+			for(int i = Program.tabCount; i> 0; i--){
+				Program.indent = Program.indent + Program.tab;
+			}
 			System.out.println(Program.indent+"Assignment:");
 			super.display();
 			target.display();
 			source.display();
+			Program.indent = tempIndent;
 	// 		indentNum = indentNum -1;
 		}
 }
@@ -157,10 +152,15 @@ class Loop extends Statement {
         test = t; body = b;
     }
     public void display(){
+		String tempIndent = Program.indent;
+			for(int i = Program.tabCount; i>0; i--){
+				Program.indent = Program.indent + Program.tab;	
+			}
 		System.out.println(Program.indent+ "Loop: ");
 			super.display();
 			test.display();
 			body.display();
+			Program.indent = tempIndent;
 		}
 }
 abstract class Expression {
@@ -187,7 +187,7 @@ class Variable extends Expression {
     public int hashCode ( ) { return id.hashCode( ); }
 	
 		public void display(){
-		System.out.println(Program.indent+ Program.tab+"Variable: "+id );
+		System.out.println(Program.indent+ Program.tab +"Variable: "+id );
 	}	
 
 }
@@ -250,7 +250,7 @@ class IntValue extends Value {
 		
 		public void display(){
 
-			System.out.println(Program.indent+Program.tab+"IntValue: "+value);
+			System.out.println(Program.indent+ Program.tab+"IntValue: "+value);
 			super.display();
 		}
 }
@@ -277,7 +277,7 @@ class BoolValue extends Value {
         return "" + value;
     }
 		public void display(){
-			System.out.println(Program.indent+Program.tab+"boolValue: "+value);
+			System.out.println(Program.indent+Program.tab+ "boolValue: "+value);
 			super.display();
 		}
 }
@@ -335,12 +335,16 @@ class Binary extends Expression {
         op = o; term1 = l; term2 = r;
     } // binary
 	public void display(){
-			System.out.println(Program.indent+Program.tab+"Binary: ");
-			Program.indent = Program.indent + Program.tab;
+			String tempIndent = Program.indent;
+			for(int i = Program.tabCount; i>0; i--){
+				Program.indent = Program.indent + Program.tab;	
+			}
+			System.out.println(Program.indent+"Binary: ");
 			op.display();
 			term1.display();
 			term2.display();
 			super.display();
+			Program.indent = tempIndent;
 		}
 }
 
